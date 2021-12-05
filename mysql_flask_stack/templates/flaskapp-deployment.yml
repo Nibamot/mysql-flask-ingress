@@ -19,6 +19,11 @@ spec:
         - name: flaskapi
           image: {{.Values.image.repositoryone}}
           imagePullPolicy: IfNotPresent
+          resources: 
+            limits:
+              cpu: {{.Values.resources.limits.cpu}}
+            requests:
+              cpu: {{.Values.resources.requests.cpu}}
           ports:
             - containerPort: {{.Values.service.flaskport}}
           env:

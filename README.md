@@ -1,8 +1,5 @@
 # Deploying a Flask API and MySQL server on with NGINX Ingress in Kubernetes
 
-I have used minikube as an example of a cloud-premise. This application has been packaged into a helmchart for sake of automation in deployment. Helming also makes our job easier to upgrade and track applications.
-
-
 This is a modified version of (https://github.com/RikKraanVantage/kubernetes-flask-mysql) with Ingress
 
 1. Deploys a Flask API to perform CRUD operations in the MySQL database
@@ -14,9 +11,12 @@ This is a modified version of (https://github.com/RikKraanVantage/kubernetes-fla
 1. Clone the repository
 2. Configure `Docker` to use the `Docker daemon` in your kubernetes cluster via your terminal: `eval $(minikube docker-env)`
 3. Build a flask-api image with the Dockerfile in this repo: `docker build . -t flask-api`
-4. `helm repo add <repo-name> https://raw.githubusercontent.com/Nibamot/mysql-flask-ingress/master`
-5. `helm install <custom-chart-name> <repo/chart-name>` to install the helm chart. Once this is done you can check the status of all the resources we introduced, including deployments, services,config-maps, secrets,HPAs etc.
-6. This chart can be removed simply by doing a `helm uninstall <custom-chart-name>`
+1. `helm repo add <repo-name> https://raw.githubusercontent.com/Nibamot/sample_lnmp_stack/master`
+2. `helm install <custom-chart-name> <repo/chart-name>` to install the helm chart. Once this is done you can check the status of all the resources we introduced, including deployments, services,config-maps, secrets,HPAs etc.
+3. This chart can be removed simply by doing a `helm uninstall <custom-chart-name>`
+
+
+
 1. Connect to your `MySQL database` by setting up a temporary pod as a `mysql-client`: 
    `kubectl run -it --rm --image=mysql --restart=Never mysql-client -- mysql --host mysql --password=<super-secret-password>`
    make sure to enter the (decoded) password specified in the `flaskapi-secrets.yml`
@@ -36,6 +36,5 @@ Now you can use the `API` to `CRUD` your database
 4. delete a user by user_id: `curl -H "Content-Type: application/json" <service_URL>/delete/<user_id>`
 5. update a user's information: `curl -H "Content-Type: application/json" -d {"name": "<user_name>", "email": "<user_email>", "pwd": "<user_password>", "user_id": <user_id>} <service_URL>/update`
 
-## The Ingress 
-Ingress basically provides external access to services within the cluster You can read more about ingress here:(https://kubernetes.io/docs/concepts/services-networking/ingress/). Ingress resources only work with Ingress Controllers. These are not started by default as part of a cluster. There is a list of available ingress controllers on this page(https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/). In this example we install the nginx ingress controller within minikube.
+
 

@@ -19,6 +19,11 @@ spec:
       - name: {{.Values.image.repositorytwo}}
         image: {{.Values.image.repositorytwo}}
         imagePullPolicy: {{.Values.image.pullPolicy}}
+        resources: 
+          limits:
+            cpu: {{.Values.resources.limits.cpu}}
+          requests:
+            cpu: {{.Values.resources.requests.cpu}}
         env:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:

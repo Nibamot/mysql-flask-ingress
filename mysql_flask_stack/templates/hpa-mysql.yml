@@ -1,0 +1,15 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: mysql
+spec:
+  maxReplicas: {{.Values.autoscaling.maxReplicas}}
+  minReplicas: {{.Values.autoscaling.minReplicas}}
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: mysql
+  targetCPUUtilizationPercentage: {{.Values.autoscaling.targetCPUUtilizationPercentage}}
+status:
+  currentReplicas: 0
+  desiredReplicas: 0
