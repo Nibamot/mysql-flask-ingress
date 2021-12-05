@@ -1,0 +1,45 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaskapi-deployment
+  labels:
+    app: flaskapi
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flaskapi
+  template:
+    metadata:
+      labels:
+        app: flaskapi
+    spec:
+      containers:
+        - name: flaskapi
+          image: {{.Values.image.repositoryone}}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: {{.Values.service.flaskport}}
+          env:
+            - name: db_root_password
+              valueFrom:
+                secretKeyRef:
+                  name: {{.Values.secretname}}
+                  key: db_root_password
+            - name: db_name
+              value: flaskapi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-service
+spec:
+  ports:
+  - port: {{.Values.service.flaskport}}
+    protocol: TCP
+    targetPort: {{.Values.service.flaskport}}
+  selector:
+    app: flaskapi
+  type: {{.Values.service.type}}
