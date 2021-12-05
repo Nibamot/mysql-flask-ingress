@@ -1,5 +1,7 @@
 # Deploying a Flask API and MySQL server on with NGINX Ingress in Kubernetes
 
+I have used minikube as an example of a cloud-premise. This application has been packaged into a helmchart for sake of automation in deployment. Helming also makes our job easier to upgrade and track applications.
+
 This is a modified version of (https://github.com/RikKraanVantage/kubernetes-flask-mysql) with Ingress
 
 1. Deploys a Flask API to perform CRUD operations in the MySQL database
@@ -36,5 +38,6 @@ Now you can use the `API` to `CRUD` your database
 4. delete a user by user_id: `curl -H "Content-Type: application/json" <service_URL>/delete/<user_id>`
 5. update a user's information: `curl -H "Content-Type: application/json" -d {"name": "<user_name>", "email": "<user_email>", "pwd": "<user_password>", "user_id": <user_id>} <service_URL>/update`
 
-
+## The Ingress 
+Ingress basically provides external access to services within the cluster You can read more about ingress here:(https://kubernetes.io/docs/concepts/services-networking/ingress/). Ingress resources only work with Ingress Controllers. These are not started by default as part of a cluster. There is a list of available ingress controllers on this page(https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/). In this example we install the nginx ingress controller within minikube.
 
