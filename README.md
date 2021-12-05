@@ -11,12 +11,9 @@ This is a modified version of (https://github.com/RikKraanVantage/kubernetes-fla
 1. Clone the repository
 2. Configure `Docker` to use the `Docker daemon` in your kubernetes cluster via your terminal: `eval $(minikube docker-env)`
 3. Build a flask-api image with the Dockerfile in this repo: `docker build . -t flask-api`
-1. `helm repo add <repo-name> https://raw.githubusercontent.com/Nibamot/sample_lnmp_stack/master`
-2. `helm install <custom-chart-name> <repo/chart-name>` to install the helm chart. Once this is done you can check the status of all the resources we introduced, including deployments, services,config-maps, secrets,HPAs etc.
-3. This chart can be removed simply by doing a `helm uninstall <custom-chart-name>`
-
-
-
+4. `helm repo add <repo-name> https://raw.githubusercontent.com/Nibamot/mysql-flask-ingress/master`
+5. `helm install <custom-chart-name> <repo/chart-name>` to install the helm chart. Once this is done you can check the status of all the resources we introduced, including deployments, services,config-maps, secrets,HPAs etc.
+6. This chart can be removed simply by doing a `helm uninstall <custom-chart-name>`
 1. Connect to your `MySQL database` by setting up a temporary pod as a `mysql-client`: 
    `kubectl run -it --rm --image=mysql --restart=Never mysql-client -- mysql --host mysql --password=<super-secret-password>`
    make sure to enter the (decoded) password specified in the `flaskapi-secrets.yml`
