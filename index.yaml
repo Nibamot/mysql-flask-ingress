@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  mysql_flask_stack:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-12-05T21:47:31.401030808+01:00"
+    description: A Helm chart for Flask-API access into MySQL in Kubernetes
+    digest: e96748e41f9d484ddf9f01ec03e0225e99c46e6ea1e4cd68b263aae9b754302a
+    name: mysql_flask_stack
+    type: application
+    urls:
+    - mysql_flask_stack-0.1.0.tgz
+    version: 0.1.0
+generated: "2021-12-05T21:47:31.400496652+01:00"
